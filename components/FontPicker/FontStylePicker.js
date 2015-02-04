@@ -6,7 +6,7 @@ jQuery.fn.definePlugin('FontStylePicker', function () {
 		presetSelectClass:'font-style-picker-preset-select',
 		fontPickerClass: 'font-style-picker-font-picker',
 		fontSizeClass: 'font-style-picker-font-size',
-		textStyleClass: 'font-style-picker-text-style' 
+		textStyleClass: 'font-style-picker-text-style'
 	};
 
     var defaultFontDisplayName = 'Arial';
@@ -21,9 +21,9 @@ jQuery.fn.definePlugin('FontStylePicker', function () {
         contentMarkup += '<div class="uilib-divider-row"><span class="font-picker-label"> </span><span class="props-place-holder"></span></div>';
 
     var textStyleHtml = '';
-    textStyleHtml += '<button value="bold" class="grad-1" style="font-family: serif;font-weight: bold;">B</button>';
-    textStyleHtml += '<button value="italic" class="grad-1" style="font-family: serif;font-style: italic;">I</button>';
-    textStyleHtml += '<button value="underline" class="grad-1" style="font-family: serif;text-decoration: underline;">U</button>';
+    textStyleHtml += '<button type="button" value="bold" class="grad-1" style="font-family: serif;font-weight: bold;">B</button>';
+    textStyleHtml += '<button type="button" value="italic" class="grad-1" style="font-family: serif;font-style: italic;">I</button>';
+    textStyleHtml += '<button type="button" value="underline" class="grad-1" style="font-family: serif;text-decoration: underline;">U</button>';
 
     return {
 		init : function () {
@@ -47,7 +47,7 @@ jQuery.fn.definePlugin('FontStylePicker', function () {
 		markup : function () {
 			this.$el.html(boxLikeDrop);
 			this.$el.addClass(names.fontStylePickerClass);
-			
+
 			this.createPopup();
 			this.createFontPicker();
 			this.createTextStylePicker();
@@ -55,21 +55,21 @@ jQuery.fn.definePlugin('FontStylePicker', function () {
             this.createPresetPicker();
 
 			this.popup.content.innerHTML = contentMarkup;
-			
+
 			$(this.popup.content).find('.style-place-holder').append(
 				this.presetSelectPicker.$el.addClass(names.presetSelectClass)
 			);
-			
+
 			$(this.popup.content).find('.font-place-holder').append(
 				this.fontPicker.$el.addClass(names.fontPickerClass)
 			);
-			
+
 			$(this.popup.content).find('.props-place-holder').append(
 				this.fontSizePicker.$el.addClass(names.fontSizeClass),
 				this.textStylePicker.$el.addClass(names.textStyleClass)
 			);
-			
-			//this.popup.open();			
+
+			//this.popup.open();
 		},
 		createFontSizePicker: function(){
 			this.fontSizePicker = this.UI().create({
@@ -126,8 +126,8 @@ jQuery.fn.definePlugin('FontStylePicker', function () {
 						return $el;
 					}
 				}
-			}).getCtrl();		
-			
+			}).getCtrl();
+
 		},
         createCustomMarkup: function(){
             var fontFamily = (this.fontPicker && this.fontPicker.getValue() && this.fontPicker.getValue().value) || defaultFont;
@@ -189,9 +189,9 @@ jQuery.fn.definePlugin('FontStylePicker', function () {
 					onposition: function(){}
 				}
 			}).getCtrl();
-			
+
 			this.popup.setRelativeElement(that.$el.find('.box-like-drop')[0]);
-		
+
 		},
 		hideArrow:function(){
 			$(this.popup.arrow).hide(50);
@@ -209,7 +209,7 @@ jQuery.fn.definePlugin('FontStylePicker', function () {
 			this.registerToChangeEventAndDelegate(this.textStylePicker, this);
 			this.registerToChangeEventAndDelegate(this.fontPicker, this);
 			this.registerToChangeEventAndDelegate(this.presetSelectPicker, this);
-			
+
 			this.$el.on('uilib-dropdown-close', function(evt, plugin){
 				if(plugin.isOpen && $(that.popup.arrow).hasClass('popup-arrow-top')){
                     setTimeout(function(){
@@ -222,7 +222,7 @@ jQuery.fn.definePlugin('FontStylePicker', function () {
 					that.hideArrow();
 				}
 			});
-			
+
 			this.whenDestroy(function(){
 				this.fontSizePicker.destroy();
 				this.textStylePicker.destroy();
@@ -333,7 +333,7 @@ jQuery.fn.definePlugin('FontStylePicker', function () {
 				this.handlePluginPresetSelectChange(plugin, evt);
 			} else {
 				this.handleNonPluginPresetSelectChange(plugin, evt);
-			}			
+			}
 			this.triggerChangeEvent(this.getValue());
 		},
 		registerToChangeEventAndDelegate: function(plugin, ctx){
